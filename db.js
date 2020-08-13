@@ -1,5 +1,4 @@
-
-module.exports = {
+const db = {
     customers: [
         { name: 'Bob', id: 118, age: 30 },
         { name: 'Will', id: 73, age: 15 },
@@ -27,3 +26,5 @@ module.exports = {
         { name: 'product11', id: 14, price: 48 },
     ],
 };
+
+module.exports = { production: db, test: db };

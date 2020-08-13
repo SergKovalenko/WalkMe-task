@@ -1,8 +1,19 @@
-const db = require('../db');
+let db = null;
 
-// find item by id in DB... sort of
+function connectDb(dbToConnect) {
+    return new Promise((resolve, reject) => {
+        db = dbToConnect;
+        resolve();
+    });
+}
+
+// find item by id in DB, async
 function find(collectionName, id) {
     return new Promise((resolve, reject) => {
+        if (!db) {
+            return reject({ status: 500, message: `No connected DB` });
+        }
+
         if (!db[collectionName]) {
             return reject({ status: 404, message: `Collection ${collectionName} does not exists` });
         }
@@ -20,4 +31,4 @@ function find(collectionName, id) {
     });
 }
 
-module.exports = { find };
+module.exports = { connectDb, find };
